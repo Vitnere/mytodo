@@ -1,0 +1,15 @@
+U ovom folderu se smjestaju promjene na bazi od kreiranja kolona, promjena kolona ili tabela.
+
+Format izmjene: yyyy-mm-dd-ip-kratak_opis_izmjene.sql
+yyyy-godina kad je izmjena uradjena
+mm-mjesec kad je izmjena uradjena
+dd-dan kad je izmjena uradjena
+ip-iniciali imena i prezimena npr Nemanja Kolar - nk
+kratak_opis_izmjene-kratak opis izmjena koje se nalaze u tom 
+fajlu npr dodana kolona, promjena u teabeli korisnici i sl.
+
+Fajlovi se prave na dnevnoj bazi, kad zavrsis sa radom napravis 
+i ovaj fajl ako si mjenjao sta na bazi da, ako ja ili
+bilo ko drugi ko je dodan na projekat moze da izvrsavanjem 
+svih izmjena na bazi ima istu bazu za projekat kao i ti
+sto je pravis.
