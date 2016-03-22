@@ -48,7 +48,6 @@
                     <nav>
                         <ul class="nav masthead-nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Login</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </nav>
@@ -56,9 +55,19 @@
             </div>
 
             <div class="inner cover">
+                <!--komanda ispod ucitava sadrzaj main_content varjable koja je u
+                kontroleru precizirana da sadrzi podatke iz home.php dokumenta-->
                 <?php $this->load->view($main_content);  ?>
                 <p class="lead">
-                    <a href="#" class="btn btn-lg btn-default">Learn more</a>
+                    <a href="#" class="btn btn-lg btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Login</a>
+
+                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <?php $this->load->view('users/login'); ?>
+                        </div>
+                    </div>
+                </div>
                 </p>
             </div>
 
@@ -76,14 +85,14 @@
 
 </div>
 
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 <!--Google API Jquery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
