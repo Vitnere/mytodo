@@ -7,6 +7,15 @@
 </p>
 <?php endif; ?><!-- zatvarenje if izjave sa linije 2 -->
 
+
+
+<?php if($this->session->flashdata('login_success')) : ?>
+<p class="alert alert-dismissable alert-success">
+    <?php echo $this->session->flashdata('login_success');?>
+</p>
+<?php endif; ?>
+
+
 <h1 class="cover-heading">Welcome to myTodo</h1>
 <p class="lead">myTodo us a simple and helpful application to help you manage your
     day to day tasks. You can add as many task lists as you want and as
