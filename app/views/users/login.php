@@ -13,7 +13,7 @@
  prvi je lokacija tj usmeravanje na login funkciju
  drugi parametar je davanje attributes varjable-->
 
-<?php echo form_open('user/login', $attributes); ?>
+<?php echo form_open('users/login', $attributes); ?>
 
 <p><!-- USERNAME -->
     <?php echo form_label('Username'); ?><!--Label forme sa vrijednoscu Username-->
