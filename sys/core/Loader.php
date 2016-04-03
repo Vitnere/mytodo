@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,10 +28,10 @@
  *
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
+ * @link	http://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Loader
  * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/loader.html
+ * @link		http://codeigniter.com/user_guide/libraries/loader.html
  */
 class CI_Loader {
 
@@ -285,43 +285,13 @@ class CI_Loader {
 			$this->database($db_conn, FALSE, TRUE);
 		}
 
-		// Note: All of the code under this condition used to be just:
-		//
-		//       load_class('Model', 'core');
-		//
-		//       However, load_class() instantiates classes
-		//       to cache them for later use and that prevents
-		//       MY_Model from being an abstract class and is
-		//       sub-optimal otherwise anyway.
 		if ( ! class_exists('CI_Model', FALSE))
 		{
-			$app_path = APPPATH.'core'.DIRECTORY_SEPARATOR;
-			if (file_exists($app_path.'Model.php'))
-			{
-				require_once($app_path.'Model.php');
-				if ( ! class_exists('CI_Model', FALSE))
-				{
-					throw new RuntimeException($app_path."Model.php exists, but doesn't declare class CI_Model");
-				}
-			}
-			elseif ( ! class_exists('CI_Model', FALSE))
-			{
-				require_once(BASEPATH.'core'.DIRECTORY_SEPARATOR.'Model.php');
-			}
-
-			$class = config_item('subclass_prefix').'Model';
-			if (file_exists($app_path.$class.'.php'))
-			{
-				require_once($app_path.$class.'.php');
-				if ( ! class_exists($class, FALSE))
-				{
-					throw new RuntimeException($app_path.$class.".php exists, but doesn't declare class ".$class);
-				}
-			}
+			load_class('Model', 'core');
 		}
 
 		$model = ucfirst($model);
-		if ( ! class_exists($model, FALSE))
+		if ( ! class_exists($model))
 		{
 			foreach ($this->_ci_model_paths as $mod_path)
 			{
@@ -718,16 +688,9 @@ class CI_Loader {
 	{
 		if (is_array($library))
 		{
-			foreach ($library as $key => $value)
+			foreach ($library as $driver)
 			{
-				if (is_int($key))
-				{
-					$this->driver($value, $params);
-				}
-				else
-				{
-					$this->driver($key, $params, $value);
-				}
+				$this->driver($driver);
 			}
 
 			return $this;
@@ -936,14 +899,6 @@ class CI_Loader {
 		 */
 		if (is_array($_ci_vars))
 		{
-			foreach (array_keys($_ci_vars) as $key)
-			{
-				if (strncmp($key, '_ci_', 4) === 0)
-				{
-					unset($_ci_vars[$key]);
-				}
-			}
-
 			$this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
 		}
 		extract($this->_ci_cached_vars);
@@ -1349,7 +1304,10 @@ class CI_Loader {
 		// Autoload drivers
 		if (isset($autoload['drivers']))
 		{
-			$this->driver($autoload['drivers']);
+			foreach ($autoload['drivers'] as $item)
+			{
+				$this->driver($item);
+			}
 		}
 
 		// Load libraries
