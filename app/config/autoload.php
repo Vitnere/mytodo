@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('User_model');//HINT:auto load User_Model-a
+$autoload['model'] = array('User_model','List_model');//HINT:auto load fajlova iz Models fajla

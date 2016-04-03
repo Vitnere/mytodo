@@ -22,7 +22,7 @@
             </p>
             <ul class="nav">
               <li><a href="<?php echo base_url(); ?>">Home</a></li>
-               <?php if($this->session->userdata('logged_in')) : ?><!--ako smo logovani-->
+               <?php if($this->session->userdata('logged_in')) : ?><!--ako je user logovan-->
                     <li><a href="<?php echo base_url(); ?>lists">My Lists</a></li><!-- onda poklazi ovaj link -->
                <?php endif; ?>
             </ul>
