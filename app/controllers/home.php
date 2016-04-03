@@ -17,3 +17,5 @@ class Home extends CI_Controller
         //u zagradi,prvi je lokacija layouta, drugi je $data array
     }
 }
+
+?>

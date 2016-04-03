@@ -15,6 +15,17 @@
 </p>
 <?php endif; ?>
 
+<?php if($this->session->flashdata('logged_out')) : ?>
+    <p class="alert alert-dismissable alert-success">
+        <?php echo $this->session->flashdata('logged_out');?>
+    </p>
+<?php endif; ?>
+
+<?php if($this->session->flashdata('noaccess')) : ?>
+    <p class="alert alert-dismissable alert-success">
+        <?php echo $this->session->flashdata('noaccess');?>
+    </p>
+<?php endif; ?>
 
 <h1 class="cover-heading">Welcome to myTodo</h1>
 <p class="lead">myTodo us a simple and helpful application to help you manage your

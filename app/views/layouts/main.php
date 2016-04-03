@@ -14,16 +14,16 @@
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
              <!--RIGHT TOP CONTENT-->
-             <?php if($this->session->userdata('logged_in')) : ?>
-               Welcome,  <?php echo $this->session->userdata('username'); ?>
-             <?php else : ?>
-                <a href="<?php echo base_url(); ?>users/register">Register</a>
-             <?php endif; ?>
+                <?php if($this->session->userdata('logged_in')) : ?>
+                    Welcome,  <?php echo $this->session->userdata('username'); ?>
+                <?php else : ?>
+                    <a href="<?php echo base_url(); ?>users/register">Register</a>
+                <?php endif; ?>
             </p>
             <ul class="nav">
               <li><a href="<?php echo base_url(); ?>">Home</a></li>
-               <?php if($this->session->userdata('logged_in')) : ?>
-                    <li><a href="<?php echo base_url(); ?>lists">My Lists</a></li>  
+               <?php if($this->session->userdata('logged_in')) : ?><!--ako smo logovani-->
+                    <li><a href="<?php echo base_url(); ?>lists">My Lists</a></li><!-- onda poklazi ovaj link -->
                <?php endif; ?>
             </ul>
           </div><!--/.nav-collapse -->
@@ -50,7 +50,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Copyright 2013</p>
+        <p>&copy; Copyright 2016</p>
       </footer>
     </div><!--/.fluid-container-->
 </body>
