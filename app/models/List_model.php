@@ -6,6 +6,11 @@
  * Time: 12:15 PM
  */
 
+
+/*Tvoj dobar drugar za sve modele, i komunikaciju CI sa bazom,
+ kao i kucanje kverija i ostalog SQL koda kroz CI
+https://ellislab.com/codeigniter/user-guide/database/active_record.html
+*/
 class List_model extends CI_Model
 {
     public function get_lists()
@@ -15,14 +20,14 @@ class List_model extends CI_Model
         $query = $this->db->get('lists');//odradi query koji ce povuci sve iz tabele lists
         return $query->result();//vrati query kao rezultat
         //HINT:result() sluzi za vracanje vise od jedne kolone iz tabele
+        //HINT:row() sluzi za vracanje samo jedne kolone iz tabele
     }
 
     public function get_list($id)
     {
-        $query =  $this->db->get('lists');//odradi query koji ce povuci sve iz tabele lists
-        $this->db->where('id',$id);//gdje je polje ID=ID
-        return $query->row();//vrati queri kao pojedinacan red
-        //HINT:row() sluzi za vracanje samo jedne kolone iz tabele
+        $this->db->select(*);
+
+
     }
 
     public function create_list($data)
@@ -61,6 +66,32 @@ class List_model extends CI_Model
 
     }
 
+    public function get_list_tasks($list_id, $active =  TRUE)
+    {
+        $this->db->select('
+                            tasks.task_name,
+                            tasks.task_body,
+                            tasks.id as task_id,
+                            lists.list_name,
+                            lists.list_body
+                            ');
 
+        $this->db->from('tasks');
+        $this->db->join('lists','lists.id = tasks.list_id');
+        $this->db->where('tasks.list_id',$list_id);
+        if($active == TRUE)
+        {
+            $this->db->where('tasks.is_complete',0);
+        }else
+        {
+            $this->db->where('tasks.is_complete',1);
+        }
 
+        $query=$this->db->get();
+        if($query->num_rows()<1)
+        {
+            return FALSE;
+        }
+        return $query->result();
+    }
 }
