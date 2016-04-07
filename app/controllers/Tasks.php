@@ -8,7 +8,7 @@
 
 class Tasks extends CI_Controller
 {
-    public function show($id)
+    public function show($id)//funkcija koja za parametar uzima id koji dolazi iz URL-a
     {
 
         //Get single task info

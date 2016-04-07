@@ -3,7 +3,9 @@
 
 <!--Display Errors-->
 <?php echo validation_errors('<p class="text-error">'); ?>
-<?php echo form_open('tasks/edit/'.$this->uri->segment(3).''); ?>
+<?php echo form_open('tasks/edit/'.$this->uri->segment(3).''); ?><!--forma ce biti postana kroz
+metodu edit koja se nalazi u tasks kontroleru i pozivase se segment tri url.
+Npr tri segmet sl linka "Home/index/edit" je "edit" -->
 
 <!--Field: Task Name-->
 <p>

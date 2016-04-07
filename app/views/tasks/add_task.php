@@ -14,7 +14,8 @@
         'value'       => set_value('task_name')
     );
     ?>
-    <?php echo form_input($data); ?>
+    <?php echo form_input($data); ?><!-- proslijede podatke kontroleru Tasks,
+    koji dalje prosljeduje Task_model koji dalje prosljeduje bazi tasks-->
 </p>
 
 <!--Field: Task Body-->
@@ -26,7 +27,8 @@
         'value'       => set_value('task_body')
     );
     ?>
-    <?php echo form_textarea($data); ?>
+    <?php echo form_textarea($data); ?><!-- proslijede podatke kontroleru Tasks,
+    koji dalje prosljeduje Task_model koji dalje prosljeduje bazi tasks-->
 </p>
 
 <!--Field: Date-->
@@ -37,9 +39,10 @@
 
 <!--Submit Buttons-->
 <?php $data = array("value" => "Add Task",
-    "name" => "submit",
-    "class" => "btn btn-primary"); ?>
+                    "name"  => "submit",
+                    "class" => "btn btn-primary"); ?>
 <p>
-    <?php echo form_submit($data); ?>
+    <?php echo form_submit($data); ?><!-- proslijede podatke kontroleru Tasks,
+    koji dalje prosljeduje Task_model koji dalje prosljeduje bazi tasks-->
 </p>
 <?php echo form_close(); ?>

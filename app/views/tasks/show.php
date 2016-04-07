@@ -1,6 +1,8 @@
 <ul id="actions">
     <h4>Task Actions</h4>
+    <!--Ispod je pozivanje kontroleratasks i metode add-->
     <li> <a href="<?php echo base_url(); ?>tasks/add/<?php echo $task->list_id; ?>">Add Task</a></li>
+    <!--Ispod je pozivanje kontrolera tasks i metode add-->
     <li> <a href="<?php echo base_url(); ?>tasks/edit/<?php echo $task->id; ?>">Edit Task</a></li>
     <?php if($is_complete) : ?>
         <li> <a href="<?php echo base_url(); ?>tasks/mark_new/<?php echo $task->id; ?>">Mark New</a></li>
@@ -27,7 +29,7 @@
     <?php echo '<p class="text-success">' .$this->session->flashdata('marked_new') . '</p>'; ?>
 <?php endif; ?>
 
-<ul id="info">
+<ul id="info"><!--Info podaci o taskovima-->
     <li>Created On: <strong><?php echo date("n-j-Y",strtotime($task->create_date)); ?></strong></li>
 
     <?php if($task->is_complete == 0) : ?>
