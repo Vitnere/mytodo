@@ -10,9 +10,27 @@ class Task_model extends CI_Model
 {
     public function get_task($id)//funkcija koja kao parametar uzima id iz url-a(adrese) taska
     {
-        $query = $this->db->get('tasks');//povuci sve podatke iz tabele tasks
-        $this->db->where('id',$id);//gdje je id iz urla jednak id iz tabele tasks
-        return $query->row();//onda vrati taj pojedinacni red
+        $this->db->select('
+        tasks.task_name,
+        tasks.id,
+        tasks.create_date,
+        tasks.task_body,
+        tasks.is_complete,
+        lists.id as list_id,
+        lists.list_name,
+        lists.list_body
+        ');
+        $this->db->from('tasks');
+        $this->db->join('lists','lists.id =  tasks.list_id');
+        $this->db->where('tasks.id',$id);
+        $query = $this->db->get();
+        if($query->num_rows() != 1)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->row();
+        }
     }
 
     public function check_if_complete($id)

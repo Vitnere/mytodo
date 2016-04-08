@@ -25,9 +25,17 @@ class List_model extends CI_Model
 
     public function get_list($id)
     {
-        $this->db->select(*);
-
-
+        $this->db->select('*');
+        $this->db->from('lists');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        if ($query->num_rows() != 1)
+        {
+            return FALSE;
+        }else
+        {
+            return $query->row();
+        }
     }
 
     public function create_list($data)

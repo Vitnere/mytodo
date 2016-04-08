@@ -79,6 +79,16 @@ class Tasks extends CI_Controller
                 redirect('lists/show/'.$list_id.'');
             }
         }
+
+    }
+
+        public function delete($list_id){
+            //Delete list
+            $this->List_model->delete_list($list_id);
+            //Create Message
+            $this->session->set_flashdata('list_deleted', 'Your list has been deleted');
+            //Redirect to list index
+            redirect('lists/index');
     }
 
 }

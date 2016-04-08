@@ -1,15 +1,15 @@
 <ul id="actions">
     <h4>Task Actions</h4>
     <!--Ispod je pozivanje kontroleratasks i metode add-->
-    <li> <a href="<?php echo base_url(); ?>tasks/add/<?php echo $task->list_id; ?>">Add Task</a></li>
+    <li> <a href="<?php echo base_url(); ?>Tasks/add/<?php echo $task->list_id; ?>">Add Task</a></li>
     <!--Ispod je pozivanje kontrolera tasks i metode add-->
-    <li> <a href="<?php echo base_url(); ?>tasks/edit/<?php echo $task->id; ?>">Edit Task</a></li>
+    <li> <a href="<?php echo base_url(); ?>Tasks/edit/<?php echo $task->id; ?>">Edit Task</a></li>
     <?php if($is_complete) : ?>
-        <li> <a href="<?php echo base_url(); ?>tasks/mark_new/<?php echo $task->id; ?>">Mark New</a></li>
+        <li> <a href="<?php echo base_url(); ?>Tasks/mark_new/<?php echo $task->id; ?>">Mark New</a></li>
     <?php else : ?>
-        <li> <a href="<?php echo base_url(); ?>tasks/mark_complete/<?php echo $task->id; ?>">Mark Complete</a></li>
+        <li> <a href="<?php echo base_url(); ?>Tasks/mark_complete/<?php echo $task->id; ?>">Mark Complete</a></li>
     <?php endif; ?>
-    <li> <a onclick="return confirm('Are you sure?')" href="<?php echo base_url(); ?>tasks/delete/<?php echo $task->list_id; ?>/<?php echo $this->uri->segment(3); ?>">Delete Task</a></li>
+    <li> <a onclick="return confirm('Are you sure?')" href="<?php echo base_url(); ?>Tasks/delete/<?php echo $task->list_id; ?>/<?php echo $this->uri->segment(3); ?>">Delete Task</a></li>
 </ul>
 <h1><?php echo $task->task_name; ?></h1>
 
