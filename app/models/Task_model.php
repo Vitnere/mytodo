@@ -21,58 +21,63 @@ class Task_model extends CI_Model
         lists.list_body
         ');
         $this->db->from('tasks');
-        $this->db->join('lists','lists.id =  tasks.list_id');
-        $this->db->where('tasks.id',$id);
-        $query = $this->db->get();
-        if($query->num_rows() != 1)
-        {
+        $this->db->join('lists', 'lists.id =  tasks.list_id');
+        $this->db->where('tasks.id', $id);
+        $query=$this->db->get();
+        if ($query->num_rows() != 1) {
             return FALSE;
-        }else
-        {
+        } else {
             return $query->row();
         }
     }
 
     public function check_if_complete($id)
     {
-        $this->db->where('id',$id);//gdje je id iz url jednak id iz tabele
-        $query = $this->db->get('tasks');//povuci sve podatke iz table tasks
+        $this->db->where('id', $id);//gdje je id iz url jednak id iz tabele
+        $query=$this->db->get('tasks');//povuci sve podatke iz table tasks
         return $query->row()->is_complete;//i vrati taj tacni odredeni red sa istom vrijednoscu
         // koja je precizirana na redu 20
     }
 
     public function get_list_name($list_id)
     {
-        $this->db->where('id',$list_id);//ako je id iz url-a jednak list_id
-        $query = $this->db->get('lists');//onda vrati sve vrijednosti iz tabele lists
+        $this->db->where('id', $list_id);//ako je id iz url-a jednak list_id
+        $query=$this->db->get('lists');//onda vrati sve vrijednosti iz tabele lists
         return $query->row()->list_name;//filtriraj kolonu sa imenom liste koja odgovara
         //uslove preciziranom na liniji 28
     }
 
     public function create_task($data)
     {
-        $insert =  $this->db->insert('tasks',$data);//umetni podatke u tabelu tasks
+        $insert=$this->db->insert('tasks', $data);//umetni podatke u tabelu tasks
         return $insert;//vrati insert varjablu sa reda iznad
     }
 
     public function get_task_list_id($task_id)
     {
-        $this->db->where('id',$task_id);//ako je id iz URL jednak task_id
-        $query =  $this->db->get('tasks');//onda povuci sve podatke iz tabele tasks
+        $this->db->where('id', $task_id);//ako je id iz URL jednak task_id
+        $query=$this->db->get('tasks');//onda povuci sve podatke iz tabele tasks
         return $query->row()->list_id;//i medu tim podacima filtriraj list_id u pojedinacnom redu
     }
 
     public function get_task_data($task_id)
     {
-        $this->db->where('id',$task_id);
-        $query = $this->db->get('tasks');
+        $this->db->where('id', $task_id);
+        $query=$this->db->get('tasks');
         return $query->row();
     }
 
-    public function edit_task($task_id,$data){//dva parametra:task_id i podaci iz forme edit_task
+    public function edit_task($task_id, $data)
+    {//dva parametra:task_id i podaci iz forme edit_task
         $this->db->where('id', $task_id);//gdje je id uz URL jednak task_id
         $this->db->update('tasks', $data);//onda updejtuj tabelu tasks sa podacima iz forme edit_taks
         return TRUE;//vrati tacno
     }
 
+        public function delete($task_id)
+    {
+        $this->db->where('id',$task_id);
+        $this->db->delete('tasks');
+        return;
+    }
 }
