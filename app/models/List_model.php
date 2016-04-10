@@ -23,16 +23,16 @@ class List_model extends CI_Model
         //HINT:row() sluzi za vracanje samo jedne kolone iz tabele
     }
 
-    public function get_list($id)
+    public function get_list($id)//trebamo dobiti jedan red jer dobijamo preko id liste iz URL-a
     {
-        $this->db->select('*');
-        $this->db->from('lists');
-        $this->db->where('id',$id);
-        $query = $this->db->get();
-        if ($query->num_rows() != 1)
+        $this->db->select('*');//izaberi sve liste
+        $this->db->from('lists');//izaberi sve iz list table
+        $this->db->where('id',$id);//gdje je id iz tabele jednak id iz url-a
+        $query = $this->db->get();//povuci sve podatke u kveri
+        if ($query->num_rows() != 1)//ako u kveriju broj redova nije jednak 1
         {
-            return FALSE;
-        }else
+            return FALSE;//onda ne vracaj nista
+        }else//inace
         {
             return $query->row();
         }
@@ -74,32 +74,37 @@ class List_model extends CI_Model
 
     }
 
-    public function get_list_tasks($list_id, $active =  TRUE)
+    public function get_list_tasks($list_id, $active =  TRUE)//prvi parametar je id liste
+        // a drugi je da li je task aktivan
     {
+        //HINT:ZA vise o sintaksi JOIN-a pogledaj active_record u Codiginiter documents
         $this->db->select('
                             tasks.task_name,
                             tasks.task_body,
                             tasks.id as task_id,
                             lists.list_name,
                             lists.list_body
-                            ');
+                            ');//kod joina kada se koristi dva id iz dvije razlicite tabele potrebno
+                            //je jedan id imenovati pod alijasom(red 83) da ne bi doslo do zabune
 
-        $this->db->from('tasks');
-        $this->db->join('lists','lists.id = tasks.list_id');
-        $this->db->where('tasks.list_id',$list_id);
-        if($active == TRUE)
+        $this->db->from('tasks');//izaberi redove (redovi 81-86) iz tabele tasks(red 90)
+        $this->db->join('lists','lists.id = tasks.list_id');//pridruzi tabelu list,gdje je id iz tabele lists
+        //jednak list_id redu iz tabele tasks- ovo je uslov za spajanje(JOIN) ove dvije tabele
+        $this->db->where('tasks.list_id',$list_id);//gdje je list_id iz tabele tasks jednak list_id(parametar na pocetku
+        //get_list_tasks funkcije)
+        if($active == TRUE)//ako je task aktivan
         {
-            $this->db->where('tasks.is_complete',0);
-        }else
+            $this->db->where('tasks.is_complete',0);//onda nije kompletiran
+        }else//inace
         {
-            $this->db->where('tasks.is_complete',1);
+            $this->db->where('tasks.is_complete',1);//je kompletiran
         }
 
-        $query=$this->db->get();
-        if($query->num_rows()<1)
+        $query=$this->db->get();//kverijem povuci sve podatke( ekvilavent SQL komande SELECT(*) )
+        if($query->num_rows()<1)//ako je broj redova u kverija manji od 1,tj nula
         {
-            return FALSE;
+            return FALSE;//ne vracaj nista
         }
-        return $query->result();
+        return $query->result();//inace vrati rezultat
     }
 }

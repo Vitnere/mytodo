@@ -27,14 +27,15 @@ class Lists extends CI_Controller
 
     }
 
-    public function show($id)//metoda za prikazivanje elementa liste u view
+    public function show($id)//metoda za prikazivanje elementa liste u view,
+        //$id povlaci parametar iz url-a stranice
     {
         //Get all lists from the model
         $data['list'] = $this->List_model->get_list($id);
         //Get all completed tasks for this list
-        $data['completed_tasks'] = $this->List_model->get_list_tasks($id,true);
+        $data['active_tasks'] = $this->List_model->get_list_tasks($id,true);
         //Get all uncompleted tasks for this list
-        $data['uncompleted_tasks'] = $this->List_model->get_list_tasks($id,false);
+        $data['inactive_tasks'] = $this->List_model->get_list_tasks($id,false);
 
         //Load view and layout
         $data['main_content'] = 'lists/show';

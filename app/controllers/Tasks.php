@@ -82,7 +82,7 @@ class Tasks extends CI_Controller
 
     }
 
-        public function delete($list_id,$task_id){
+        public function delete($list_id,$task_id){//dva parametra id liste i id task-a
             //Delete list
             $this->Task_model->delete($task_id);
             //Create Message

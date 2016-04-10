@@ -10,6 +10,7 @@ class Task_model extends CI_Model
 {
     public function get_task($id)//funkcija koja kao parametar uzima id iz url-a(adrese) taska
     {
+        /*Izaberi sledece kolone*/
         $this->db->select('
         tasks.task_name,
         tasks.id,
@@ -20,14 +21,17 @@ class Task_model extends CI_Model
         lists.list_name,
         lists.list_body
         ');
-        $this->db->from('tasks');
-        $this->db->join('lists', 'lists.id =  tasks.list_id');
-        $this->db->where('tasks.id', $id);
-        $query=$this->db->get();
-        if ($query->num_rows() != 1) {
-            return FALSE;
-        } else {
-            return $query->row();
+
+
+        $this->db->from('tasks');//iz tabele task
+        $this->db->join('lists', 'lists.id =  tasks.list_id');//spoji sa tabelom list(prvi uslov)
+        //po sablonu id iz tabele list da je jednak list_id koloni iz tabele tasks(drugi parametar uslov za JOIN)
+        $this->db->where('tasks.id', $id);//gdje je task_id jednak id varjabli koja se dobija iz URL-a
+        $query=$this->db->get();//povuci sve taskove
+        if ($query->num_rows() != 1) {//ako broj redova nije jedan 1
+            return FALSE;//ne vracaj nista
+        } else {//inace
+            return $query->row();//vrati jedan red
         }
     }
 
@@ -74,10 +78,11 @@ class Task_model extends CI_Model
         return TRUE;//vrati tacno
     }
 
-        public function delete($task_id)
+        public function delete($task_id)//kao parametar id task-a iz URL-a
     {
-        $this->db->where('id',$task_id);
-        $this->db->delete('tasks');
-        return;
+        $this->db->where('id',$task_id);//gdje je id taska u bazi jedank task_id
+        // koji se dobija iz URL-a stranice
+        $this->db->delete('tasks');//izbrisi taks iz tabele tasks
+        return;//vrati komandu
     }
 }
