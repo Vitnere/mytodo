@@ -82,13 +82,34 @@ class Tasks extends CI_Controller
 
     }
 
-        public function delete($list_id,$task_id){//dva parametra id liste i id task-a
-            //Delete list
-            $this->Task_model->delete($task_id);
-            //Create Message
-            $this->session->set_flashdata('task_deleted', 'Your task has been deleted');
-            //Redirect to list index
-            redirect('lists/show'.$list_id.'');
+
+    public function mark_complete($task_id)
+    {
+        if($this->Task_model->mark_complete($task_id))
+        {
+            $list_id =  $this->Task_model->get_task_list_id($task_id);
+            $this->session->set_flashdata('marked_complete','Task has been marked complete');
+            redirect('/lists/show/'.$list_id.'');
+        }
     }
 
+    public function mark_new($task_id)
+    {
+        if($this->Task_model->mark_new($task_id))
+        {
+            $list_id =  $this->Task_model->get_task_list_id($task_id);
+            $this->session->set_flashdata('marked_complete','Task has been marked new');
+            redirect('/lists/show/'.$list_id.'');
+        }
+    }
+
+    public function delete($list_id,$task_id)
+    {//dva parametra id liste i id task-a
+        //Delete list
+        $this->Task_model->delete($task_id);
+        //Create Message
+        $this->session->set_flashdata('task_deleted', 'Your task has been deleted');
+        //Redirect to list index
+        redirect('lists/show'.$list_id.'');
+    }
 }

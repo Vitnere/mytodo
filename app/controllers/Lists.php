@@ -17,7 +17,7 @@ class Lists extends CI_Controller
     {
         $user_id = $this->session->userdata('user_id');
 
-        $data['lists'] = $this->List_model->get_lists();//podatke iz tabele list=pozovi iz List_model metodu get_lists
+        $data['lists'] = $this->List_model->get_all_lists($user_id);//podatke iz tabele list=pozovi iz List_model metodu get_lists
         //usmjeravanje kontrolera na komunikaciju sa modelom i njegovom izabranom metodom koji vrsi komunikaciju sa bazom
 
         //Load view and layout
@@ -91,6 +91,11 @@ class Lists extends CI_Controller
             }
         }
     }
+
+    public function get_list($id)
+{
+
+}
 
     public function delete($list_id){
         //Delete list

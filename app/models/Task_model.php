@@ -57,12 +57,6 @@ class Task_model extends CI_Model
         return $insert;//vrati insert varjablu sa reda iznad
     }
 
-    public function get_task_list_id($task_id)
-    {
-        $this->db->where('id', $task_id);//ako je id iz URL jednak task_id
-        $query=$this->db->get('tasks');//onda povuci sve podatke iz tabele tasks
-        return $query->row()->list_id;//i medu tim podacima filtriraj list_id u pojedinacnom redu
-    }
 
     public function get_task_data($task_id)
     {
@@ -82,7 +76,40 @@ class Task_model extends CI_Model
     {
         $this->db->where('id',$task_id);//gdje je id taska u bazi jedank task_id
         // koji se dobija iz URL-a stranice
-        $this->db->delete('tasks');//izbrisi taks iz tabele tasks
+        $this->db->delete('tasks');//izbrisi task iz tabele tasks
         return;//vrati komandu
     }
+
+    public function mark_new($task_id)
+    {
+        $this->db->set('is_complete',0);
+        $this->db->where('id',$task_id);
+        $this->db->update('tasks');
+        return true;
+    }
+
+    public function mark_complete($task_id)
+    {
+        $this->db->set('is_complete',1);
+        $this->db->where('id',$task_id);
+        $this->db->update('tasks');
+        return true;
+    }
+
+    public function get_task_list_id($task_id)
+    {
+        $this->db->where('id', $task_id);//ako je id iz URL jednak task_id
+        $query=$this->db->get('tasks');//onda povuci sve podatke iz tabele tasks
+        return $query->row()->list_id;//i medu tim podacima filtriraj list_id u pojedinacnom redu
+    }
+
+    public function get_users_tasks($user_id)
+    {
+        $this->db->where('list_user_id',$user_id);
+        $this->db->join('tasks', 'lists.id = tasks.list_id');
+        $this->db->order_by('tasks.create_date', 'desc');
+        $query = $this->db->get('lists');
+        return $query->result();
+    }
+
 }

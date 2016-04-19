@@ -68,7 +68,7 @@ class List_model extends CI_Model
     public function get_all_lists($user_id)
     {
         $this->db->where('list_user_id',$user_id);
-        $this->db->order_by('create_date','asc');
+        $this->db->order_by('create_date','desc');
         $query = $this->db->get('lists');
         return $query->result();
 
@@ -106,5 +106,12 @@ class List_model extends CI_Model
             return FALSE;//ne vracaj nista
         }
         return $query->result();//inace vrati rezultat
+    }
+
+    public function delete_tasks_of_list($list_id)
+    {
+        $this->db->where('list_id',$list_id);
+        $this->db->delete('tasks');
+        return;
     }
 }

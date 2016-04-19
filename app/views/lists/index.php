@@ -21,8 +21,7 @@
         <div class="list_name">
 
             <!-- Link do root foldera/lists kontrolera/show metodu u lists kontroleru-->
-            <a href="<?php echo base_url();?>lists/show/
-                     <?php echo $list->id; ?>"><!-- printanje id iz tabelu list,
+            <a href="<?php echo base_url();?>lists/show/<?php echo $list->id; ?>"><!-- printanje id iz tabelu list,
                      valjda je potrebno oko identifikacije, tako mi i treba kad se pravim pametan
                       pa hocu da budem PHP nindza :D -->
                      <?php echo $list->list_name.'<br>'; ?><!-- printanje imena liste iz tabele lists  -->

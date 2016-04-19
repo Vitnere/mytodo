@@ -27,10 +27,9 @@
     </p>
 <?php endif; ?>
 
-<h1 class="cover-heading">Welcome to myTodo</h1>
-<p class="lead">myTodo us a simple and helpful application to help you manage your
-    day to day tasks. You can add as many task lists as you want and as
-    many tasks as you want. myTodo is absolutely free! Have fun.</p>
+<?php if($this->session->userdata('logged_in')) : ?><!--ako je user logovan-->
+
+<p><a href="<?php echo base_url(); ?>lists/add">Create a new list</a></p>
 
 <br />
 <h3>My Latest Lists</h3>
@@ -50,3 +49,37 @@
         <?php endforeach; ?>
     <?php endif; ?>
 </table>
+
+
+<h3>Latest Tasks</h3>
+<table class="table table-striped" width="50%" cellspacing="5" cellpadding="5">
+    <tr>
+        <th>Task Name</th>
+        <th>List Name</th>
+        <th>Created On</th>
+        <th>View</th>
+    </tr>
+    <?php if(isset($tasks)) : ?>
+        <?php foreach($tasks as $task) : ?>
+            <tr>
+                <td> <?php echo $task->task_name; ?></td>
+                <td><?php echo $task->list_name; ?></td>
+                <td><?php echo $task->create_date; ?></td>
+                <td><a href="<?php echo base_url(); ?>tasks/show/<?php echo $task->id; ?>">View Task</a></td>
+
+            </tr>
+        <?php endforeach; ?>
+    <?php endif;?>
+</table>
+<?php else:?>
+    <h1 class="cover-heading">Welcome to myTodo</h1>
+    <p class="lead">myTodo is a simple and helpful application to help you manage your
+        day to day tasks. You can add as many task lists as you want and as
+        many tasks as you want. myTodo is absolutely free! Have fun.</p>
+    <br>
+    <p class="lead">myTodo je jednostavna i besplatna web aplikacija koja vam pomaze da upravljate
+        svojim dnevnim zadacima.Mozete dodavati svoji zadatke i liste zadataka koliko vam
+        je volja.myTodo je potpuno besplatan i bice uvijek besplatan!Uzivajte.</p>
+<?php endif; ?>
+
+

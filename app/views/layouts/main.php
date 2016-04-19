@@ -51,6 +51,8 @@
 
       <footer>
         <p>&copy; Copyright 2016</p>
+          <p>Created by <a href="http://nemanjakolar.bitballoon.com/"  target="_blank">Nemanja Kolar</a>
+              and <a href="https://www.codeigniter.com/"  target="_blank">Codeigniter</a></p>
       </footer>
     </div><!--/.fluid-container-->
 </body>
