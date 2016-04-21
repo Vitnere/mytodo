@@ -108,10 +108,13 @@ class List_model extends CI_Model
         return $query->result();//inace vrati rezultat
     }
 
-    public function delete_tasks_of_list($list_id)
+    public function delete_tasks_of_list($list_id)//funkcija za brisanje taskova iz liste
     {
-        $this->db->where('list_id',$list_id);
-        $this->db->delete('tasks');
+        //HINT:pri razvoju projekta uvijek brisati dijelove koji su child parent elementa,recimo u ovom primjeru
+        //OBAVEZNO brisati taskove koji su child liste(parenta)
+        $this->db->where('list_id',$list_id);//gdje je list_id iz URl jednak $list_id iz
+        //tasks tabele
+        $this->db->delete('tasks');//izbrisi taj red iz tabele tasks
         return;
     }
 }

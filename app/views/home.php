@@ -15,6 +15,7 @@
 </p>
 <?php endif; ?>
 
+
 <?php if($this->session->flashdata('logged_out')) : ?><!-- Ako je odraden log out -->
     <p class="alert alert-dismissable alert-success">
         <?php echo $this->session->flashdata('logged_out');?>
