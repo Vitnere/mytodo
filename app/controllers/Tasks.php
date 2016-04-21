@@ -85,21 +85,23 @@ class Tasks extends CI_Controller
 
     public function mark_complete($task_id)
     {
-        if($this->Task_model->mark_complete($task_id))
-        {
-            $list_id =  $this->Task_model->get_task_list_id($task_id);
-            $this->session->set_flashdata('marked_complete','Task has been marked complete');
-            redirect('/lists/show/'.$list_id.'');
+        if($this->Task_model->mark_complete($task_id))//ako je pozvana funkcija iz Task_modela
+            //pod imenom mark_complete(sa parametrom $task_id)
+        {//onda
+            $list_id =  $this->Task_model->get_task_list_id($task_id);//poziv funkcije get_task_list_id($task_id)
+            $this->session->set_flashdata('marked_complete','Task has been marked complete');//flash data
+            redirect('/lists/show/'.$list_id.'');//redirekcija
         }
     }
 
     public function mark_new($task_id)
     {
-        if($this->Task_model->mark_new($task_id))
+        if($this->Task_model->mark_new($task_id))//poziv funkcije mark_new u Task_modelu
         {
-            $list_id =  $this->Task_model->get_task_list_id($task_id);
+            $list_id =  $this->Task_model->get_task_list_id($task_id);//poziv funkcije get_task_list_id u Task_modelu
             $this->session->set_flashdata('marked_complete','Task has been marked new');
-            redirect('/lists/show/'.$list_id.'');
+            redirect('/lists/show/'.$list_id.'');//odradi redirekciju na zadanu stranicu i list_id koji se dobija iz modela
+            // i baza je navikacije
         }
     }
 
@@ -110,6 +112,6 @@ class Tasks extends CI_Controller
         //Create Message
         $this->session->set_flashdata('task_deleted', 'Your task has been deleted');
         //Redirect to list index
-        redirect('lists/show'.$list_id.'');
+        redirect('/lists/show/'.$list_id.'');
     }
 }
