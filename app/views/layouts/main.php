@@ -22,9 +22,11 @@
             </p>
             <ul class="nav">
               <li><a href="<?php echo base_url(); ?>">Home</a></li>
+
                <?php if($this->session->userdata('logged_in')) : ?><!--ako je user logovan-->
                     <li><a href="<?php echo base_url(); ?>Lists">My Lists</a></li><!-- onda poklazi ovaj link -->
                <?php endif; ?>
+                <li><a href="<?php echo base_url(); ?>users/contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

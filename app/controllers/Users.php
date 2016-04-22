@@ -12,8 +12,6 @@ many validation rules as you need for a given field, cascading them in order,
 
             'First_Name',//A "human" name for this field, which will be inserted into the error message.
             // For example, if your field is named "user" you might give it a human name of "Username".
-
-            //HINT:xss_clean se koristi za zastitu od napada na bazu podataka
             'trim|required|max_length[50]|min_length[2]');//The validation rules for this form field.
 
         $this->form_validation->set_rules(
@@ -126,6 +124,34 @@ many validation rules as you need for a given field, cascading them in order,
         $this->session->unset_userdata('username');
         $this->session->sess_destroy();
         redirect('home/index');
+
+    }
+
+    public function contact()
+    {
+        $this->form_validation->set_rules('name','Name','trim|required|min_length[4]');
+        $this->form_validation->set_rules('email','Email','trim|required|min_length[4]');
+        $this->form_validation->set_rules('message','Message','trim|required|min_length[4]');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['main_content'] = 'users/contact';
+            $this->load->view('layouts/main',$data);
+        }
+
+        else
+        {
+            if($this->User_model->contact_submit())
+            {
+                $this->session->set_flashdata('registered','Thanks for your feedback');
+
+                redirect('home/index');
+            }
+        }
+
+
+
+
 
     }
 }

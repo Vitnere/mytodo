@@ -50,5 +50,19 @@
                 return false;//ako nisu vrijednosti iste vrati false, tj ne radi nista
             }
         }
+
+        public function contact_submit()
+        {
+
+            $data = array(
+
+                'name'      => $this->input->post('name'),
+                'email'      => $this->input->post('email'),
+                'message'   => $this->input->post('message'),
+            );
+
+            $insert = $this->db->insert('contact', $data);
+            return $insert;
+        }
     }
 
