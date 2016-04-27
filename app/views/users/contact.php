@@ -1,8 +1,8 @@
 <h1>Contact</h1>
 <p>Please fill out the form to contact</p>
-<p><b>Portofolio:</b><a href="http://nemanjakolar.bitballoon.com/">Click</a></p>
-<p>Number:(+387)065/217-621<br>
-Mail:nemanjakolar@gmail.com</p>
+<p><b>Portofolio:</b><a href="http://nemanjakolar.bitballoon.com/"  target="_blank">Click</a></p>
+<p><b>Number:</b>(+387)065/217-621<br>
+<b>Mail:</b> nemanjakolar@gmail.com</p>
 
 
 <!--Display Errors-->
@@ -52,6 +52,8 @@ Mail:nemanjakolar@gmail.com</p>
 <p>
     <?php echo form_submit($data); ?>
 </p>
+
+
 <?php echo form_close(); ?>
 
 
