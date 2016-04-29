@@ -10,7 +10,7 @@
 <?php if($this->session->userdata('logged_in')) : ?><!-- Ako sam logovan  -->
 
     <!-- onda prikazi logout formu -->
-    <p>You are logged in as <?php echo $this->session->userdata('username'); ?></p><!-- poruka u logout formi -->
+    <p>You are logged in as <?php echo $this->session->userdata('username'); ?></p>
     <!--Start Logout Form-->
     <?php $attributes = array('id' => 'logout_form',
         'class' => 'form-horizontal'); ?>
